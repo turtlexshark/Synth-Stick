@@ -1,5 +1,5 @@
 # Synth-Stick
-I have no idea if this is going to compile because I wrote it on a text editor at work, but I took a stab at fixing the machine gun firing of notes that we were experiencing. Here are the changes I made:
+I have no idea if this is going to compile because I wrote it on a text editor at work, but I took a stab at fixing the machine gun firing of notes that we were experiencing. Here are the changes I made in the SynthStick-Caleb.ino file:
 
 - I divided our SoftPot into 15 sections and set the notes to play a Major scale from E to the E two octaves up.
 - I made an enum for the "fret" that is currently being played.
