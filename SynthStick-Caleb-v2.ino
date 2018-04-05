@@ -3,10 +3,11 @@
 SoftwareSerial mySerial(2, 3); // RX, TX
 
 enum fret{OPEN, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15};
-int[] major = {36, 38, 40, 41, 43, 45, 47, 48, 50, 52, 53, 55, 57, 59, 60};
-int[] majorPent = {36, 38, 40, 43, 45, 48, 50, 52, 55, 57, 60, 62, 64, 67, 69};
-int[] minorPent = {36, 39, 41, 42, 43, 46, 48, 51, 53, 54, 55, 58, 60, 63, 65};
-int[] currentScale = major;
+int major[] = {36, 38, 40, 41, 43, 45, 47, 48, 50, 52, 53, 55, 57, 59, 60};
+int majorPent[] = {36, 38, 40, 43, 45, 48, 50, 52, 55, 57, 60, 62, 64, 67, 69};
+int minorPent[] = {36, 39, 41, 42, 43, 46, 48, 51, 53, 54, 55, 58, 60, 63, 65};
+int currentScale[15];
+memcpy(currentScale, major, sizeof(currentScale));
 const int SOFT_POT_PIN = A0; // Pin connected to softpot wiper
 int  instrument = 2;
 int note = 40;
@@ -191,13 +192,14 @@ enum fret findFret(int softPotADC) {
 
 void changeScale() {
   if (memcmp(currentScale, major, sizeof(currentScale)) == 0) { //(currentScale == major) {
-    currentScale = majorPent;
+    memcpy(currentScale, majorPent, sizeof(currentScale));
   }
   else if (memcmp(currentScale, majorPent, sizeof(currentScale)) == 0) {
     currentScale = minorPent;
+    memcpy(currentScale, minorPent, sizeof(currentScale));
   }
   else {
-    currentScale = major;
+    memcpy(currentScale, major, sizeof(currentScale));
   }
 }
 
