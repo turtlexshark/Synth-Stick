@@ -190,10 +190,10 @@ enum fret findFret(int softPotADC) {
 }
 
 void changeScale() {
-  if (currentScale == major) {
+  if (memcmp(currentScale, major, sizeof(currentScale)) == 0) //(currentScale == major) {
     currentScale = majorPent;
   }
-  else if (currentScale == majorPent) {
+  else if (memcmp(currentScale, majorPent, sizeof(currentScale)) == 0) {
     currentScale = minorPent;
   }
   else {
