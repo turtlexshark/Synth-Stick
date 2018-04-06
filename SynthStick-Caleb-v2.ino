@@ -35,7 +35,8 @@ void loop() {
   
   // Read in the soft pot's ADC value
   enum fret lastFret = currentFret;   // Hopefully this works in the first loop lol
-  enum fret currentFret = findFret(analogRead(SOFT_POT_PIN));
+  int softPotADC = analogRead(SOFT_POT_PIN);
+  enum fret currentFret = findFret(softPotADC);
 
   // Figure out if a new note is being played
   if (currentFret == lastFret) {
