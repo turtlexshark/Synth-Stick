@@ -8,6 +8,7 @@ int  instrument = 2;
 int note = 40;
 byte resetMIDI = 4; //Tied to VS1053 Reset line
 byte ledPin = 13; //MIDI traffic inidicator
+enum fret currentFret;
 
 void setup() {
   Serial.begin(9600);
@@ -26,31 +27,23 @@ void setup() {
 }
 
 void loop() {
-  talkMIDI(0xB0, 0, 0x79); //Default bank GM1  
+  talkMIDI(0xB0, 0, 0x79); //Default bank GM1    
   
   // Read in the soft pot's ADC value
+  int softPotADC = analogRead(SOFT_POT_PIN); 
   enum fret lastFret = currentFret;   // Hopefully this works in the first loop lol
-  enum fret currentFret = findFret(analogRead(SOFT_POT_PIN));
-
+  currentFret = findFret(softPotADC);
+  
   // Figure out if a new note is being played
-  if (currentFret == lastFret) {
-    boolean newNote = false;
-  }
-  else {
-    boolean newNote = true;
-  }
+  boolean newNote = currentFret != lastFret;
 
   talkMIDI(0xC0, instrument, 0); //Set instrument number. 0xC0 is a 1 data byte command
-
-  //if (softPotADC < 10 && softPotADC > 0) {
-    Serial.println(softPotADC);
-  //}
   
   //if pot is pressed, play note
   if (softPotADC > 10 && newNote) {
     
     if (softPotADC <= 71) {
-       //Note on channel 0, some note value (note), middle velocity (0x45):
+      //Note on channel 0, some note value (note), middle velocity (0x45):
       noteOn(0, 40, 60);
       delay(50);
     }
@@ -127,10 +120,6 @@ void loop() {
     else {
       //do nothing
     }    
-    
-    //Turn off the note with a given off/release velocity
-//    noteOff(0, note, 60);
-//    delay(50);
   } 
 }
 
