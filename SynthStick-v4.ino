@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-#include <string.h>
+#include <string.h> 
 
 SoftwareSerial mySerial(2, 3); // RX, TX
 
