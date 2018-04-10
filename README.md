@@ -21,3 +21,10 @@ I got the code compiling for using the memcpy on arrays. It just had to be done 
 - Added a button to change scales
 - Added functions for changing instrument up, changing instrument down, and changing scale
 - Now using arrays and memcpy to change scale and play the correct note
+
+# SynthStick-v4.ino
+The code is still compiling, so that's a good sign. Here are a list of the changes I made with this version:
+
+- Added a button for changing key
+- Added functions to update a given scale's keys
+- Added a function to change key being played
