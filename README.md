@@ -13,3 +13,11 @@ Still unsure if it'll compile/is syntactically correct, but... More changes impl
 - Hard coded the Major, Major Pentatonic, and Minor Pentatonic (with b5) scales into separate arrays
 - Created a currentScale array to hold the current array scale values
 - Created a method changeScale that should change scale arrays when it's called. Use for a button toggle or something
+
+# SynthStick-v3.ino
+I got the code compiling for using the memcpy on arrays. It just had to be done in the setup() function instead of out in the global sphere where we were declaring it. Changes:
+
+- Added a button for instrument down
+- Added a button to change scales
+- Added functions for changing instrument up, changing instrument down, and changing scale
+- Now using arrays and memcpy to change scale and play the correct note
